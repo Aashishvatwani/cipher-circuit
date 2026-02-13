@@ -97,12 +97,12 @@ className="hero max-w-7xl mx-auto mb-16">
 
 <div className="hero-shell">
   <div className="hero-core">
-    <p className="hero-kicker">Cipher Circuit Ops</p>
+    <p className="hero-kicker">MINISTRY OF MAGIC: DEPT. OF MYSTERIES</p>
     <h1 className="hero-title">
-      CIPHER
-      <span className="hero-title-accent">COMMAND</span>
+      ARITHMANCY
+      <span className="hero-title-accent">PROTOCOL</span>
     </h1>
-    <p className="hero-subtitle">Signal integrity. Key precision. Team sync.</p>
+    <p className="hero-subtitle">Founders' logic. Ancient runes. Souls in sync</p>
     <div className="hero-meta">
       <div className="hero-tag">
         TEAM <span className="hero-tag-strong">{teamName}</span>
@@ -152,9 +152,9 @@ className="hero max-w-7xl mx-auto mb-16">
 </div>
 
 <div className="panel panel-system">
-<p className="label">System</p>
-<p className="mt-3 text-sm">AES ACTIVE</p>
-<p className="text-sm">Quantum Safe</p>
+<p className="label">Enchantment</p>
+<p className="mt-3 text-sm">PROTECTION: AES-WARD</p>
+<p className="text-sm">DEMENTOR-PROOFED</p>
 </div>
 
 </div>
@@ -163,17 +163,26 @@ className="hero max-w-7xl mx-auto mb-16">
 
 <div className="col-span-12 lg:col-span-6 panel-big">
 
-<h2 className="text-4xl font-bold section-title">PRIMARY OBJECTIVE</h2>
+<h2 className="text-4xl font-bold section-title">THE PENSIEVE PURGE</h2>
 
-<p className="mt-2 uppercase tracking-widest text-xs text-white/50">
-Generate Cryptographic Key
+<p className="mt-2 tracking-widest text-xs leading-relaxed text-white/50 text-justify font-bold uppercase">
+  The Headmaster’s Pensieve has been corrupted by a rogue spirit. The memories 
+  of Hogwarts are dissolving into dark, chaotic static. 
+  <br /><br />
+  The Ministry has summoned your House. You must align the Four Great Runes 
+  within the Astral Plane to forge a 4-bit Essence. Once 
+  the Elder Suffix is bound, your Master Key will be complete[cite: 6, 71].
+  <br /><br />
+  One shall bind the word, and the other shall seek the truth. Only through 
+  perfect synchronization can the memory be restored[cite: 135, 136].
 </p>
+
 
 {teamState.round1Complete?
 
 <div className="key-panel mt-8">
-4 BIT : {teamState.key4bit}<br/>
-8 BIT : {teamState.key8bit}
+RUNE-CODE (4 BIT) : {teamState.key4bit}<br/>
+MASTER-CHARM (8 BIT) : {teamState.key8bit}
 </div>
 
 :
@@ -258,12 +267,12 @@ Generate Cryptographic Key
 <div className="panel">
 <p className="label mb-4">Simulator</p>
 <a href="https://circuitverse.org/" target="_blank">
-<button className="side-btn amber">Open CircuitVerse</button>
+<button className="side-btn amber">Enter CircuitVerse</button>
 </a>
 </div>
 
 <div className="panel">
-<p className="label mb-4">Protocol</p>
+<p className="label mb-4">The Wizard's Oath</p>
 <ol className="text-xs text-white/70 list-decimal list-inside space-y-2">
 <li>Generate Key</li>
 <li>Verify teammate</li>

@@ -100,7 +100,7 @@ const Header = () => (
     <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
       <h2 className="text-xl md:text-2xl text-white/70 font-medium flex items-center gap-2">
         <CircuitBoard className="w-5 h-5 text-cyan-400" />
-        4-Bit Key Generation
+        Ancient Rune Alignment 
       </h2>
       <div className="flex items-center gap-2 text-sm text-white/50">
         <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse" />
@@ -378,7 +378,7 @@ export default function Round1() {
                 <p className="text-white/60 text-sm mb-4">Construct the circuit using these components:</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 rounded-lg bg-black/30 border border-white/10">
-                    <p className="text-lime-400 text-xs mb-2 font-bold uppercase tracking-wider">Components</p>
+                    <p className="text-lime-400 text-xs mb-2 font-bold uppercase tracking-wider">Magical Elements</p>
                     <ul className="text-white/70 text-sm space-y-2">
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-lime-400" />
@@ -447,7 +447,7 @@ export default function Round1() {
                   <Sparkles className="w-5 h-5 text-lime-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-lime-400 font-bold text-sm mb-1">IMPORTANT</p>
-                    <p className="text-white/60 text-sm">Each teammate must submit the key independently. Both submissions must match to advance.</p>
+                    <p className="text-white/60 text-sm">Both Technomancers must cast the spell independently. The Pensieve only opens if the words are identical.</p>
                   </div>
                 </div>
               </StepCard>
@@ -527,13 +527,13 @@ export default function Round1() {
                 <div>
                   <h2 className="text-xl font-bold text-white flex items-center gap-2">
                     <Unlock className="w-5 h-5 text-cyan-400" />
-                    Key Console
+                    Ritual Altar
                   </h2>
                   <p className="text-white/50 text-sm mt-1">Enter your generated 4-bit key</p>
                 </div>
                 <div className="status-badge pending">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                  Awaiting Input
+                  Awaiting Incantation
                 </div>
               </div>
 
@@ -615,7 +615,7 @@ export default function Round1() {
                   ) : success ? (
                     <>
                       <CheckCircle2 className="w-5 h-5" />
-                      Complete
+                      Ritual Stabilized
                     </>
                   ) : (
                     <>
@@ -634,13 +634,13 @@ export default function Round1() {
             <div className="glass-panel rounded-2xl p-6 h-full">
               <div className="flex items-center gap-2 mb-6">
                 <Cpu className="w-5 h-5 text-cyan-400" />
-                <p className="text-xs text-cyan-400 font-bold uppercase tracking-wider">XOR Logic Guide</p>
+                <p className="text-xs text-cyan-400 font-bold uppercase tracking-wider">The Arithmancy Scroll</p>
               </div>
 
               
 
               <div className="mt-6 pt-6 border-t border-white/10">
-                <p className="text-xs text-white/40 mb-3">XOR Truth Table</p>
+                <p className="text-xs text-white/40 mb-3">Incantation Outcomes</p>
                 <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                   <div className="p-2 rounded bg-black/40 text-white/60 flex justify-between">
                     <span>0 ⊕ 0</span>
@@ -674,12 +674,12 @@ export default function Round1() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-white/40 text-sm">
               <Cpu className="w-4 h-4" />
-              <span className="font-mono">CryptoCTF 2024</span>
+              <span className="font-mono">Hogwarts Arithmancy Dept.</span>
             </div>
             <div className="flex items-center gap-6 text-white/40 text-sm">
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-lime-400" />
-                System Online
+                Magic Stabilized
               </span>
               <span className="font-mono">Round 1 of 2</span>
             </div>
