@@ -42,7 +42,8 @@ export const useSocket = (teamId: string | null, role?: 'encrypt' | 'decrypt' | 
     }
 
     // Connect to WebSocket server with JWT token
-    const socket = io('http://localhost:3001', {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+    const socket = io(apiUrl, {
       auth: {
         token: token
       },
