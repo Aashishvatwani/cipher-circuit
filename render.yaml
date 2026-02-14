@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: cipher-circuit-server
+    runtime: node
+    buildCommand: cd cipher-circuit/server && npm install
+    startCommand: cd cipher-circuit/server && npm start
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://aashish:bharatloveyash123@cluster0.imz3xfm.mongodb.net/ieee-circuit-cafe?appName=Cluster0&retryWrites=true&w=majority
+      - key: DB_NAME
+        value: ieee-circuit-cafe
+      - key: JWT_SECRET
+        value: cipher-circuit-secret-key-2026-ieee
