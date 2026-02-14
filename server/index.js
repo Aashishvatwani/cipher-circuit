@@ -10,7 +10,7 @@ const { generateToken,  authMiddleware, socketAuthMiddleware } = require('./auth
 
 const app = express();
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: false
@@ -22,8 +22,8 @@ app.use(express.json());
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
   }
 });
 
