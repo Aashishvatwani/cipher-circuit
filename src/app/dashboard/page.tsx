@@ -25,6 +25,7 @@ const router = useRouter();
 const [teamName,setTeamName]=useState('');
 const [teamId,setTeamId]=useState<string | null>(null);
 const [role,setRole]=useState<'encrypt' | 'decrypt' | null>(null);
+const [roleSelecting,setRoleSelecting]=useState(false);
 
 const { teamState: socketTeamState } = useSocket(teamId, role);
 
@@ -62,11 +63,17 @@ useEffect(() => {
     assignedNumber: socketTeamState.assignedNumber ?? null,
     encryptionValue: socketTeamState.encryptionValue ?? null
   });
-}, [socketTeamState]);
+
+  // Clear loading state when round becomes 1
+  if (socketTeamState.round === 1 && roleSelecting) {
+    setRoleSelecting(false);
+  }
+}, [socketTeamState, roleSelecting]);
 
 const chooseRole=(nextRole:'encrypt' | 'decrypt')=>{
   localStorage.setItem('role', nextRole);
   setRole(nextRole);
+  setRoleSelecting(true);
 };
 
 const handleLogout = () => {
@@ -205,15 +212,29 @@ MASTER-CHARM (8 BIT) : {teamState.key8bit}
 
 <div className="col-span-12 lg:col-span-3 space-y-8">
 
-{!role && teamState.round1Complete && (
+{!role ? (
   <div className="panel text-center">
     <p className="label mb-4">Select Role</p>
-    <div className="flex gap-3 justify-center">
-      <button onClick={()=>chooseRole('encrypt')} className="role-btn role-emerald">Encrypt</button>
-      <button onClick={()=>chooseRole('decrypt')} className="role-btn role-purple">Decrypt</button>
-    </div>
+    {roleSelecting ? (
+      <div className="text-sm text-cyan-300 animate-pulse">
+        <p>Connecting...</p>
+        <p className="text-xs text-white/50 mt-2">Syncing with teammate</p>
+      </div>
+    ) : (
+      <div className="flex gap-3 justify-center">
+        <button onClick={()=>chooseRole('encrypt')} className="role-btn role-emerald">Encrypt</button>
+        <button onClick={()=>chooseRole('decrypt')} className="role-btn role-purple">Decrypt</button>
+      </div>
+    )}
   </div>
-)}
+) : teamState.round === 1 ? (
+  <div className="panel text-center border border-green-400/50 bg-green-400/5">
+    <p className="text-green-300 text-sm font-bold">✓ SYNCED</p>
+    <p className="label mt-2">Both Players Ready</p>
+    <p className="text-xs text-white/70 mt-2">Entering Round 1...</p>
+    <p className="text-xs text-white/50 mt-1">Role: {role.toUpperCase()}</p>
+  </div>
+) : null}
 
 <div className={`panel round2-panel ${!teamState.round1Complete&&'opacity-40'}`}>
 

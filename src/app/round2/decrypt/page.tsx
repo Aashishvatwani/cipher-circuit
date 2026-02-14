@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { useSocket } from '@/hooks/useSocket';
 
 export default function Decrypt() {
 
@@ -16,6 +17,11 @@ const [key,setKey]=useState('');
 const [success,setSuccess]=useState(false);
 const [waiting,setWaiting]=useState(true);
 const [error,setError]=useState('');
+const [teamId, setTeamId] = useState<string | null>(null);
+const [role, setRole] = useState<'encrypt' | 'decrypt' | null>(null);
+const [submitting, setSubmitting] = useState(false);
+
+const { connected, submitDecryption, teamState } = useSocket(teamId, role);
 
 const CODING_PLATFORM_URL = process.env.NEXT_PUBLIC_CODING_PLATFORM_URL || 'https://frontend-sigma-virid-71.vercel.app';
 
@@ -34,6 +40,11 @@ const state=JSON.parse(localStorage.getItem('teamState')||'{}');
 if(!state.round1Complete) router.push('/dashboard');
 if(state.role!=='decrypt') router.push('/dashboard');
 
+const storedTeamId = localStorage.getItem('teamId');
+const storedRole = (localStorage.getItem('role') as 'encrypt' | 'decrypt' | null) || null;
+setTeamId(storedTeamId);
+setRole(storedRole || 'decrypt');
+
 setKey(state.key8bit||'00000000');
 const encryptedValue=typeof state.encryptionValue==='number' ? state.encryptionValue : null;
 if(encryptedValue!==null){
@@ -44,18 +55,28 @@ setBinary(d);
 setDecimal(parseInt(d,2).toString());
 setWaiting(false);
 }
-},[]);
+},[router]);
+
+// Listen for completion event
+useEffect(() => {
+  if (teamState?.round2Complete) {
+    setSuccess(true);
+    setTimeout(() => router.push('/round2/result'), 500);
+  }
+}, [teamState, router]);
 
 const submit=()=>{
+if(!connected) {
+  setError('Not connected. Please wait...');
+  return;
+}
 if(input!==decimal){
 setError('Incorrect value');
 return;
 }
-const state=JSON.parse(localStorage.getItem('teamState')||'{}');
-state.round2Complete=true;
-localStorage.setItem('teamState',JSON.stringify(state));
-setSuccess(true);
-setTimeout(()=>router.push('/round2/result'),1500);
+
+setSubmitting(true);
+submitDecryption(input);
 };
 
 return(

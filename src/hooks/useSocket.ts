@@ -32,7 +32,7 @@ export const useSocket = (teamId: string | null, role?: 'encrypt' | 'decrypt' | 
   const [round1Result, setRound1Result] = useState<Round1Result | null>(null);
 
   useEffect(() => {
-    if (!teamId || !role) return;
+    if (!teamId) return;
 
     // Get JWT token from localStorage
     const token = localStorage.getItem('authToken');
@@ -61,7 +61,7 @@ export const useSocket = (teamId: string | null, role?: 'encrypt' | 'decrypt' | 
 
       // Join team room
       const teamName = localStorage.getItem('teamName');
-      socket.emit('join_team', { teamId, teamName, role });
+      socket.emit('join_team', { teamId, teamName, role: role || null });
     });
 
     socket.on('connect_error', (error: any) => {
@@ -114,6 +114,15 @@ export const useSocket = (teamId: string | null, role?: 'encrypt' | 'decrypt' | 
       socket.disconnect();
     };
   }, [teamId, role]);
+
+  // Re-emit role update when role changes after initial connection
+  useEffect(() => {
+    if (socketRef.current && socketRef.current.connected && role && teamId) {
+      const teamName = localStorage.getItem('teamName');
+      socketRef.current.emit('join_team', { teamId, teamName, role });
+      console.log('Role updated:', role);
+    }
+  }, [role, teamId]);
 
   const submitRound1Key = (key: string) => {
     if (socketRef.current && teamId) {

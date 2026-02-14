@@ -228,9 +228,11 @@ io.on('connection', (socket) => {
 
       const currentMember = team.members.find(m => m.socketId === socket.id);
       const onlineMembers = team.members.filter(m => m.online).length;
+      let roundAdvanced = false;
       if (onlineMembers === 2 && team.round === 0) {
         team.round = 1;
         await team.save();
+        roundAdvanced = true;
       }
 
       // Store connection info
@@ -247,6 +249,11 @@ io.on('connection', (socket) => {
 
       // Send current team state
       socket.emit('team_state', buildTeamState(team, currentMember));
+
+      // If round advanced, broadcast to all team members
+      if (roundAdvanced) {
+        io.to(teamId).emit('team_state', buildTeamState(team, currentMember));
+      }
 
       // Notify other team members
       socket.to(teamId).emit('teammate_joined', {
@@ -425,6 +432,7 @@ io.on('connection', (socket) => {
           { upsert: true }
         );
 
+        // Send confirmation to the submitting player
         socket.emit('decryption_result', {
           success: true,
           message: 'Round 2 complete!',
@@ -432,15 +440,21 @@ io.on('connection', (socket) => {
           resubmissions: team.resubmissions
         });
 
-        // Notify all team members
+        // Reload the team to ensure fresh data
+        const updatedTeam = await Team.findOne({ teamId });
+        
+        // Broadcast completion event and updated state to ALL team members
         io.to(teamId).emit('competition_complete', {
           timeElapsed,
           resubmissions: team.resubmissions
         });
 
-        team.members.forEach((member) => {
-          io.to(member.socketId).emit('team_state', buildTeamState(team, member));
+        // Ensure both team members get the updated state
+        updatedTeam.members.forEach((member) => {
+          io.to(member.socketId).emit('team_state', buildTeamState(updatedTeam, member));
         });
+        
+        console.log(`Team ${teamId} completed round 2. Members: ${updatedTeam.members.length}`);
       } else {
         team.resubmissions += 1;
         await team.save();
