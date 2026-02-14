@@ -205,7 +205,7 @@ MASTER-CHARM (8 BIT) : {teamState.key8bit}
 
 <div className="col-span-12 lg:col-span-3 space-y-8">
 
-{!role && (
+{!role && teamState.round1Complete && (
   <div className="panel text-center">
     <p className="label mb-4">Select Role</p>
     <div className="flex gap-3 justify-center">

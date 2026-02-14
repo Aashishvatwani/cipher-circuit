@@ -227,6 +227,11 @@ io.on('connection', (socket) => {
       }
 
       const currentMember = team.members.find(m => m.socketId === socket.id);
+      const onlineMembers = team.members.filter(m => m.online).length;
+      if (onlineMembers === 2 && team.round === 0) {
+        team.round = 1;
+        await team.save();
+      }
 
       // Store connection info
       activeConnections.set(socket.id, teamId);

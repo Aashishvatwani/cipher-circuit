@@ -51,8 +51,8 @@ const teamSchema = new mongoose.Schema(
     },
     round: {
       type: Number,
-      default: 1,
-      enum: [1, 2]
+      default: 0,
+      enum: [0, 1, 2]
     },
     key4bit: {
       type: String,
