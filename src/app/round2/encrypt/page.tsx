@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useSocket } from '@/hooks/useSocket';
 
 export default function Encrypt() {
 
-const CODING_PLATFORM_URL = process.env.NEXT_PUBLIC_CODING_PLATFORM_URL || 'https://www.onlinegdb.com/online_c_compiler';
+const CODING_PLATFORM_URL = process.env.NEXT_PUBLIC_CODING_PLATFORM_URL || 'https://frontend-sigma-virid-71.vercel.app';
 
 const router = useRouter();
 
@@ -72,6 +73,10 @@ return(
 <div className="absolute inset-0 opacity-30 bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)] bg-[size:60px_60px]"/>
 
 <div className="max-w-6xl mx-auto relative">
+
+<div className="flex justify-center mb-8">
+<Image src="/logo.png" alt="Logo" width={80} height={80} />
+</div>
 
 {/* HERO */}
 

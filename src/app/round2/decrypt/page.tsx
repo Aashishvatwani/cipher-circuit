@@ -17,7 +17,7 @@ const [success,setSuccess]=useState(false);
 const [waiting,setWaiting]=useState(true);
 const [error,setError]=useState('');
 
-const CODING_PLATFORM_URL = process.env.NEXT_PUBLIC_CODING_PLATFORM_URL || 'https://www.onlinegdb.com/online_c_compiler';
+const CODING_PLATFORM_URL = process.env.NEXT_PUBLIC_CODING_PLATFORM_URL || 'https://frontend-sigma-virid-71.vercel.app';
 
 function toBinary(d:number){
 return d.toString(2).padStart(8,'0');
